@@ -1,0 +1,19 @@
+{
+  "name": "sti-frontend",
+  "version": "1.0.0",
+  "description": "first frontend application",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/indigobluw/sti-frontend.git"
+  },
+  "author": "Therese",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/indigobluw/sti-frontend/issues"
+  },
+  "homepage": "https://github.com/indigobluw/sti-frontend#readme"
+}
