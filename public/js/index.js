@@ -10,7 +10,7 @@ const generateGetDate = () => {
     xhr.send();
     let data = JSON.parse(xhr.response); 
     myData = []; 
-    for ( i = 0; i<6; i++) {
+    for ( i = 0; i<8; i++) {
         myData.push(data[i]);
         myData.push(data[i]);
     }
