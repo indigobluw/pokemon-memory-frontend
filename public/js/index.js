@@ -10,7 +10,7 @@ const generateGetDate = () => {
     xhr.send();
     let data = JSON.parse(xhr.response); 
     myData = []; 
-    for ( i = 0; i<8; i++) {
+    for ( i = 0; i<6; i++) {
         myData.push(data[i]);
         myData.push(data[i]);
     }
@@ -114,5 +114,5 @@ const restart = (text) => {
         window.alert(text, 100);
     });
 };
-generateGetDate();
+generateGetDate()
 cardGenerator();
