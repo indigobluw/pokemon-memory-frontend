@@ -8,8 +8,7 @@ const generateGetDate = () => {
     let xhr = new XMLHttpRequest()
     //xhr.open("GET", "http://localhost:3001/game", false)
     //xhr.open("GET", "/js/data.json", false)
-    xhr.open("GET", "https://therese-backend.herokuapp.com/", false)
-
+    xhr.open("GET", "https://therese-backend.herokuapp.com/game", false)
     xhr.send();
     let data = JSON.parse(xhr.response); 
     myData = []; 
