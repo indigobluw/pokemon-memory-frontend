@@ -1,120 +1,107 @@
-console.log("hej");
-const section = document.querySelector("section"); 
-const playerLivesCount = document.querySelector("span"); 
-let playerLives = 8; //how many tries the player's got 
+const section = document.querySelector("section");
+const playerLivesCount = document.querySelector("span");
+let playerLives = 8;
 let myData = [];
 
 const generateGetDate = () => {
-    let xhr = new XMLHttpRequest()
-    //xhr.open("GET", "http://localhost:3001/game", false)
-    //xhr.open("GET", "/js/data.json", false)
-    xhr.open("GET", "https://therese-backend.herokuapp.com/game", false)
-    xhr.send();
-    let data = JSON.parse(xhr.response); 
-    myData = []; 
-    for ( i = 0; i<8; i++) {
-        myData.push(data[i]);
-        myData.push(data[i]);
-    }
-    console.log("AJAX run");
-    console.log(myData);
-}
-
-//link text
-playerLivesCount.textContent = playerLives;
-
-//generate the data for the cards. [{}] = array of objects
-
-function getData() { 
-    return myData;
-}
-
-// => arrow function
-const randomize = () => {
-    const cardData = getData();
-    cardData.sort(() => Math.random() - 0.5);
-    //console.log(cardData); 
-    return cardData;
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", "https://therese-backend.herokuapp.com/game", false);
+  xhr.send();
+  let data = JSON.parse(xhr.response);
+  myData = [];
+  for (i = 0; i < 8; i++) {
+    myData.push(data[i]);
+    myData.push(data[i]);
+  }
 };
 
-const cardGenerator = () => { 
-    const cardData = randomize(); 
-    cardData.forEach((item) => { //loop så den fixar koden för alla kort
-        //console.log(item);
-        //console.log(cardData);
-        const card = document.createElement("div"); 
-        const face = document.createElement("img"); 
-        const back = document.createElement("div"); 
-        card.classList = "card"; 
-        face.classList = "face"; 
-        back.classList = "back"; 
+playerLivesCount.textContent = playerLives;
 
-        face.src = item.imgSrc;  
-        card.setAttribute("name", item.name)
+function getData() {
+  return myData;
+}
 
-        section.appendChild(card); 
-        card.appendChild(face); 
-        card.appendChild(back);
+const randomize = () => {
+  const cardData = getData();
+  cardData.sort(() => Math.random() - 0.5);
+  return cardData;
+};
 
-        card.addEventListener('click', (e) => { 
-            card.classList.toggle('toggleCard');
-            checkCards(e);
-        })
-    });  
+const cardGenerator = () => {
+  const cardData = randomize();
+  cardData.forEach((item) => {
+    const card = document.createElement("div");
+    const face = document.createElement("img");
+    const back = document.createElement("div");
+    card.classList = "card";
+    face.classList = "face";
+    back.classList = "back";
+
+    face.src = item.imgSrc;
+    card.setAttribute("name", item.name);
+
+    section.appendChild(card);
+    card.appendChild(face);
+    card.appendChild(back);
+
+    card.addEventListener("click", (e) => {
+      card.classList.toggle("toggleCard");
+      checkCards(e);
+    });
+  });
 };
 
 const checkCards = (e) => {
-    console.log(e);
-    const clickedCard = e.target; 
-    clickedCard.classList.add("flipped");
-    const flippedCards = document.querySelectorAll(".flipped");
-    const toggleCard = document.querySelectorAll(".toggleCard");
+  const clickedCard = e.target;
+  clickedCard.classList.add("flipped");
+  const flippedCards = document.querySelectorAll(".flipped");
+  const toggleCard = document.querySelectorAll(".toggleCard");
 
-    if(flippedCards.length === 2) {
-        if(flippedCards[0].getAttribute("name") === flippedCards[1].getAttribute("name")) {
-            console.log("match");
-            flippedCards.forEach((card) => {
-                card.classList.remove("flipped");
-                card.style.pointerEvents = "none";
-            });
-        }
-        else {
-            console.log("no match");
-            flippedCards.forEach((card) => {
-                card.classList.remove("flipped");
-                setTimeout(() => card.classList.remove("toggleCard"), 1000);
-            });
-            playerLives--; 
-            playerLivesCount.textContent = playerLives;
-            if(playerLives === 0) { 
-                restart("No more lives, try again");
-            }
-        }
+  if (flippedCards.length === 2) {
+    if (
+      flippedCards[0].getAttribute("name") ===
+      flippedCards[1].getAttribute("name")
+    ) {
+      flippedCards.forEach((card) => {
+        card.classList.remove("flipped");
+        card.style.pointerEvents = "none";
+      });
+    } else {
+      flippedCards.forEach((card) => {
+        card.classList.remove("flipped");
+        setTimeout(() => card.classList.remove("toggleCard"), 1000);
+      });
+      playerLives--;
+      playerLivesCount.textContent = playerLives;
+      if (playerLives === 0) {
+        restart("Game over");
+      }
     }
-    if(toggleCard.length === 16) {
-        restart("Congratulations, you won!");
-    }
+  }
+  if (toggleCard.length === 16) {
+    restart("You won!");
+  }
 };
 
-const restart = (text) => { 
-    let cardData = randomize(); 
-    let faces = document.querySelectorAll(".face");
-    let cards = document.querySelectorAll(".card");
-    section.style.pointerEvents = "none";
-    cardData.forEach((item, index) => {
-        cards[index].classList.remove("toggleCard");
-        setTimeout (() => {
-            cards[index].style.pointerEvents = "all";
-            faces[index].src = item.imgSrc;
-            cards[index].setAttribute("name", item.name);
-            section.style.pointerEvents = "all";
-        }, 1000);
-    });
-    playerLives = 8;
-    playerLivesCount.textContent = playerLives; 
+const restart = (text) => {
+  let cardData = randomize();
+  let faces = document.querySelectorAll(".face");
+  let cards = document.querySelectorAll(".card");
+  section.style.pointerEvents = "none";
+  cardData.forEach((item, index) => {
+    cards[index].classList.remove("toggleCard");
     setTimeout(() => {
-        window.alert(text, 100);
-    });
+      cards[index].style.pointerEvents = "all";
+      faces[index].src = item.imgSrc;
+      cards[index].setAttribute("name", item.name);
+      section.style.pointerEvents = "all";
+    }, 1000);
+  });
+  playerLives = 8;
+  playerLivesCount.textContent = playerLives;
+  setTimeout(() => {
+    window.alert(text, 100);
+  });
 };
-generateGetDate()
+generateGetDate();
 cardGenerator();
