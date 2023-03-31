@@ -5,7 +5,8 @@ let myData = [];
 
 const generateGetDate = () => {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", "https://therese-backend.herokuapp.com/game", false);
+  //xhr.open("GET", "https://therese-backend.herokuapp.com/game", false);
+  xhr.open("GET", "http://localhost:3001/game", false);
   xhr.send();
   let data = JSON.parse(xhr.response);
   myData = [];

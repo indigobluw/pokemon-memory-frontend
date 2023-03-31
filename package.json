@@ -1,21 +1,21 @@
 {
   "name": "sti-frontend",
   "version": "1.0.0",
-  "description": "first frontend application",
+  "description": "Pokémon Memory Game",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/indigobluw/sti-frontend.git"
+    "url": "git+https://github.com/indigobluw/pokemon-memory-frontend.git"
   },
   "author": "Therese",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/indigobluw/sti-frontend/issues"
+    "url": "https://github.com/indigobluw/pokemon-memory-frontend/issues"
   },
-  "homepage": "https://github.com/indigobluw/sti-frontend#readme",
+  "homepage": "https://github.com/indigobluw/pokemon-memory-frontend#readme",
   "dependencies": {
     "express": "^4.17.2",
     "healthcheck": "^0.1.3",
