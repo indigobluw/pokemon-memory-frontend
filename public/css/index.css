@@ -111,12 +111,12 @@ p {
   text-align: center;
 }
 
-@media (max-width: 580px) {
+@media (max-width: 570px) {
   .page {
   }
 
   h1 {
-    margin-top: 9em;
+    margin-top: 8em;
   }
 
   #game {
@@ -128,5 +128,8 @@ p {
 
   p {
     width: 15em;
+    top: 82%;
+    font-size: 13px;
+    width: 320px;
   }
 }
